@@ -4,8 +4,8 @@ from apps.departments.models import BaseModel
 
 
 class Asset(BaseModel):
-    location = models.CharField(verbose_name="存放地点", max_length=254, null=True, blank=True)
-    asset_number = models.CharField(verbose_name="资产编号", max_length=254, null=True, blank=True)  #
+    asset_number = models.CharField(verbose_name="资产编号", max_length=254)  #
+    location = models.CharField(verbose_name="原始存放地点", max_length=254, null=True, blank=True)
     asset_name = models.CharField(verbose_name="资产名称", max_length=254, null=True, blank=True)
     classification = models.CharField(verbose_name="分类号", max_length=254, null=True, blank=True)
     category = models.CharField(verbose_name="分类名称", max_length=254, null=True, blank=True)
@@ -56,6 +56,11 @@ class Asset(BaseModel):
     detailed_outlay = models.CharField(verbose_name="经费详目", max_length=254, null=True, blank=True)
     unit_of_measurement = models.CharField(verbose_name="计量单位", max_length=254, null=True, blank=True)
 
+    contact_number = models.CharField(verbose_name="合同编号", max_length=254, null=True, blank=True)  #
+
     class Meta:
         verbose_name = "资产固定信息"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.asset_number

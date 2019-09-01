@@ -3,3 +3,5 @@
     crispy_forms 和 xadmin
 3. 安装xadmin的依赖包
 4. 通过migrate生成xadmin需要的表
+
+DjangoUeditor的安装: https://github.com/twz915/DjangoUeditor3

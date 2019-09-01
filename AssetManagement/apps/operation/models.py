@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db.models import ForeignKey
 
 from apps.departments.models import BaseModel
 
@@ -13,7 +14,7 @@ status_choices = (
 
 
 class Change(BaseModel):
-    summit_user = models.ForeignKey(UserProfile, verbose_name="提交审核人", on_delete=models.CASCADE,
+    summit_user: ForeignKey = models.ForeignKey(UserProfile, verbose_name="提交审核人", on_delete=models.CASCADE,
                                     related_name="user_asset")  # 加related_name是为了在UserProfile反向查找的时候和manager_id区分开来
     manager = models.ForeignKey(UserProfile, verbose_name="通过审核人", on_delete=models.CASCADE)
     room_id = models.IntegerField(verbose_name="Room_fk", default='')
@@ -28,6 +29,12 @@ class Change(BaseModel):
         verbose_name = "变更记录"
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return "{name}_{asset}_{location}".format(
+            name=self.summit_user,
+            asset=self.asset_number,
+            location=self.room_id)
+
 
 class AssetManager(BaseModel):
     manager = models.ForeignKey(UserProfile, verbose_name="设备负责人", on_delete=models.CASCADE)
@@ -40,4 +47,7 @@ class AssetManager(BaseModel):
     class Meta:
         verbose_name = "资产信息"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.manager
 

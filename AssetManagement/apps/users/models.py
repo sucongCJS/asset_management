@@ -5,7 +5,7 @@ from apps.departments.models import Department
 
 
 class UserProfile(AbstractUser):
-    number = models.CharField(max_length=15, verbose_name="学号工号", unique=True, default='')
+    number = models.CharField(max_length=15, verbose_name="学号工号", default='')  # , unique=True
     department = models.ForeignKey(Department, verbose_name="部门", on_delete=models.SET_NULL, null=True, blank=True)
     role = models.CharField(verbose_name="角色", choices=(
         ('ptr', '普通人'),

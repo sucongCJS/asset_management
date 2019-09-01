@@ -18,18 +18,24 @@ class Department(BaseModel):
         verbose_name = "部门信息"
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.name
+
 
 # 为了方便之后添加建筑楼
 class Building(BaseModel):
-    name = models.CharField(verbose_name="建筑楼号", max_length=20)
+    name = models.CharField(verbose_name="建筑楼", max_length=20)  # name + campus must be unique
     campus = models.CharField(verbose_name="所在校区", choices=(
         ("jm", "金明"),
         ("ml", "明伦")), max_length=2, default='')
     desc = models.CharField(verbose_name="描述", max_length=50, null=True, blank=True)
 
     class Meta:
-        verbose_name = "建筑楼号"
+        verbose_name = "建筑楼"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
 
 
 class Room(BaseModel):
@@ -41,3 +47,6 @@ class Room(BaseModel):
     class Meta:
         verbose_name = "房间号"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
